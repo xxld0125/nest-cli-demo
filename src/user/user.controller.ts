@@ -12,6 +12,7 @@ import {
   HttpCode,
   Res,
   Session,
+  Inject,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -20,7 +21,12 @@ import * as svgCaptcha from 'svg-captcha';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    @Inject('TestProvideName') private readonly userService: UserService,
+    @Inject('JD') private shopList: string[],
+    @Inject('Test') private string: string,
+    @Inject('Async') private asnyc: string,
+  ) {}
 
   @Post()
   create(@Body('name') name) {
@@ -37,6 +43,9 @@ export class UserController {
     return {
       code: 200,
       message: query.name,
+      data: this.shopList,
+      string: this.string,
+      asnyc: this.asnyc,
     };
   }
 
