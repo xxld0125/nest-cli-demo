@@ -29,8 +29,8 @@ export class UserController {
   ) {}
 
   @Post()
-  create(@Body('name') name) {
-    console.log(name);
+  create(@Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto);
     return {
       code: 200,
       name: name,
