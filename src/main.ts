@@ -6,6 +6,8 @@ import { Response } from './common/response';
 import { HttpFilter } from './common/filter';
 
 import { ValidationPipe } from '@nestjs/common';
+
+// import { GuardGuard } from './guard/guard.guard';
 const whiteList = ['/list'];
 
 function middleWareAll(req, res, next) {
@@ -45,6 +47,9 @@ async function bootstrap() {
 
   // 接口数据管道校验
   app.useGlobalPipes(new ValidationPipe());
+
+  // 全局守卫
+  // app.useGlobalGuards(new GuardGuard());
 
   await app.listen(3000);
 }
