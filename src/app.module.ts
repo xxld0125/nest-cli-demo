@@ -6,9 +6,31 @@ import { ConfigModule } from './config/config.module';
 import { ListModule } from './list/list.module';
 import { PipeModule } from './pipe/pipe.module';
 import { GuardModule } from './guard/guard.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TestModule } from './test/test.module';
 
 @Module({
-  imports: [UserModule, ConfigModule, ListModule, PipeModule, GuardModule],
+  imports: [
+    UserModule,
+    ConfigModule,
+    ListModule,
+    PipeModule,
+    GuardModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql', // 数据库类型
+      username: 'root', // 账号
+      password: '120616c.+', // 密码
+      host: 'localhost', // host
+      port: 3306, // 端口
+      database: 'db', // 库名
+      entities: [__dirname + '/**/*.entity{.ts,.js}'], // 实体文件
+      synchronize: true, // 是否自动将实体类同步到数据库
+      retryDelay: 500, // 重试连接数据库间隔
+      retryAttempts: 10, // 充实连接数据库次数
+      autoLoadEntities: true, // 如果为true,将自动加载实体forFeature()方法注册的每个实体都添加到配置对象的实体数组中
+    }),
+    TestModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
