@@ -13,6 +13,7 @@ import { GuardService } from './guard.service';
 import { CreateGuardDto } from './dto/create-guard.dto';
 import { UpdateGuardDto } from './dto/update-guard.dto';
 import { GuardGuard } from './guard.guard';
+import { Role, ReqUrl } from './role.decorator';
 
 @Controller('guard')
 @UseGuards(GuardGuard)
@@ -25,8 +26,10 @@ export class GuardController {
   }
 
   @Get()
+  @Role('admin')
   @SetMetadata('role', ['admin'])
-  findAll() {
+  findAll(@ReqUrl('123') url) {
+    console.log('ReqUrl', url);
     return this.guardService.findAll();
   }
 
