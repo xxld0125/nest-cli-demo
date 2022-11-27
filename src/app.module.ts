@@ -8,6 +8,7 @@ import { PipeModule } from './pipe/pipe.module';
 import { GuardModule } from './guard/guard.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestModule } from './test/test.module';
+import { FormModule } from './form/form.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { TestModule } from './test/test.module';
       autoLoadEntities: true, // 如果为true,将自动加载实体forFeature()方法注册的每个实体都添加到配置对象的实体数组中
     }),
     TestModule,
+    FormModule,
   ],
   controllers: [AppController],
   providers: [AppService],
