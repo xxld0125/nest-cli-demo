@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { getConfig } from './utils';
+import { FeishuModule } from './feishu/feishu.module';
 
 @Module({
   controllers: [AppController],
@@ -15,6 +16,7 @@ import { getConfig } from './utils';
       load: [getConfig],
     }),
     UserModule,
+    FeishuModule,
   ],
 })
 export class AppModule {}
